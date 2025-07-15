@@ -19,10 +19,24 @@
             overflow: hidden;
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
+            background-color: #222;
+            transition: background-image 0.5s ease-in-out;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
         }
 
         .content {
-            background: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.4);
             padding: 30px;
             border-radius: 15px;
             max-width: 90%;
@@ -56,6 +70,7 @@
     </style>
 </head>
 <body>
+    <div class="overlay"></div>
     <div class="content">
         <div class="versiculo" id="versiculo"></div>
         <div class="mensagem" id="mensagem"></div>
@@ -65,11 +80,11 @@
 
     <script>
         const imagensFundo = [
-            'https://source.unsplash.com/1600x900/?nature,water',
-            'https://source.unsplash.com/1600x900/?nature,forest',
-            'https://source.unsplash.com/1600x900/?nature,mountain',
-            'https://source.unsplash.com/1600x900/?nature,sunrise',
-            'https://source.unsplash.com/1600x900/?nature,river'
+            'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80',
+            'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=1600&q=80',
+            'https://images.unsplash.com/photo-1506748686214-29a5bba01d9a?auto=format&fit=crop&w=1600&q=80',
+            'https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=1600&q=80',
+            'https://images.unsplash.com/photo-1506748686214-e39c0bcdcb27?auto=format&fit=crop&w=1600&q=80'
         ];
         document.body.style.backgroundImage = `url('${imagensFundo[Math.floor(Math.random() * imagensFundo.length)]}')`;
 
@@ -84,7 +99,6 @@
             { texto: "Buscai primeiro o Reino de Deus. (Mateus 6:33)", mensagem: "Coloque Deus em primeiro lugar e o restante será acrescentado." },
             { texto: "Sede fortes e corajosos. (Josué 1:9)", mensagem: "A coragem vem da confiança em Deus." },
             { texto: "Bem-aventurados os que choram, porque serão consolados. (Mateus 5:4)", mensagem: "O consolo de Deus está sobre aqueles que sofrem." }
-            // Adicione mais versículos até completar 50...
         ];
 
         const hoje = new Date();
