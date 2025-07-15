@@ -1,115 +1,105 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Palavra da Natureza</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body {
-      height: 100%;
-      font-family: 'Segoe UI', sans-serif;
-      color: #fff;
-      overflow: hidden;
-    }
-    .bg-video {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: -1;
-    }
-    .overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 0;
-    }
-    .container {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      height: 100%;
-      padding: 2rem;
-    }
-    h1 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-    }
-    #verse {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      white-space: pre-wrap;
-    }
-    #dataHora {
-      margin-top: 1rem;
-      font-size: 0.9rem;
-      color: #eee;
-    }
-    #shareBtn {
-      background: #25D366;
-      color: white;
-      border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 5px;
-      font-size: 1rem;
-      cursor: pointer;
-      margin-top: 1rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Versículo do Dia</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        video#bgVideo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .content {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 90%;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .versiculo {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .mensagem {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .data {
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+
+        .botao-compartilhar {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-  <video autoplay muted loop class="bg-video">
-    <source src="https://cdn.coverr.co/videos/coverr-a-river-in-the-woods-3954/1080p.mp4" type="video/mp4">
-  </video>
-  <div class="overlay"></div>
-  <div class="container">
-    <h1>✨ Versículo do Dia</h1>
-    <div id="verse"></div>
-    <button id="shareBtn">Compartilhar no WhatsApp</button>
-    <div id="dataHora"></div>
-  </div>
+    <video autoplay muted loop id="bgVideo">
+        <source src="https://cdn.pixabay.com/vimeo/452822203/rainforest-47858.mp4?width=1280&hash=cd2c56a403c3b1f75e348eec39a0bafeea37b212" type="video/mp4">
+        Seu navegador não suporta vídeos em HTML5.
+    </video>
 
-  <script>
-    const versiculos = [
-      {
-        texto: "O Senhor é o meu pastor; nada me faltará. \nSalmo 23:1",
-        mensagem: "Deus cuida de você como um pastor cuida de suas ovelhas."
-      },
-      {
-        texto: "Tudo posso naquele que me fortalece. \nFilipenses 4:13",
-        mensagem: "Com Jesus ao seu lado, você pode enfrentar qualquer desafio."
-      },
-      {
-        texto: "Confia no Senhor de todo o teu coração. \nProvérbios 3:5",
-        mensagem: "Mesmo sem entender tudo, confiar em Deus é o melhor caminho."
-      }
-    ];
+    <div class="content">
+        <div class="versiculo" id="versiculo"></div>
+        <div class="mensagem" id="mensagem"></div>
+        <div class="data" id="data"></div>
+        <button class="botao-compartilhar" onclick="compartilharVersiculo()">Compartilhar via WhatsApp</button>
+    </div>
 
-    const sorteado = versiculos[Math.floor(Math.random() * versiculos.length)];
-    const textoFormatado = `<strong>${sorteado.texto}</strong><br><br><em>${sorteado.mensagem}</em>`;
-    document.getElementById("verse").innerHTML = textoFormatado;
+    <script>
+        const versiculos = [
+            { texto: "Tudo posso naquele que me fortalece. (Filipenses 4:13)", mensagem: "Com Jesus ao seu lado, você pode enfrentar qualquer desafio." },
+            { texto: "O Senhor é o meu pastor, nada me faltará. (Salmos 23:1)", mensagem: "Confie em Deus para cuidar de todas as suas necessidades." },
+            { texto: "Entrega o teu caminho ao Senhor; confia nele, e o mais ele fará. (Salmos 37:5)", mensagem: "Coloque seus planos nas mãos de Deus e tenha fé." },
+            // Adicione mais versículos aqui até 50...
+        ];
 
-    document.getElementById("shareBtn").addEventListener("click", function() {
-      const textoWpp = `${sorteado.texto}\n\n${sorteado.mensagem}`;
-      const url = `https://wa.me/?text=${encodeURIComponent(textoWpp)}`;
-      window.open(url, '_blank');
-    });
+        const hoje = new Date();
+        const diaSemana = hoje.toLocaleDateString('pt-BR', { weekday: 'long' });
+        const dataCompleta = hoje.toLocaleDateString('pt-BR');
+        const hora = hoje.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
-    function atualizarDataHora() {
-      const agora = new Date();
-      const opcoes = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-      const dataHora = agora.toLocaleDateString('pt-BR', opcoes);
-      document.getElementById("dataHora").textContent = dataHora;
-    }
-    atualizarDataHora();
-  </script>
+        const versiculoAleatorio = versiculos[Math.floor(Math.random() * versiculos.length)];
+
+        document.getElementById('versiculo').innerText = versiculoAleatorio.texto;
+        document.getElementById('mensagem').innerText = versiculoAleatorio.mensagem;
+        document.getElementById('data').innerText = `${diaSemana}, ${dataCompleta} às ${hora}`;
+
+        function compartilharVersiculo() {
+            const texto = `Versículo do Dia: ${versiculoAleatorio.texto}\nMensagem: ${versiculoAleatorio.mensagem}`;
+            const url = `https://wa.me/?text=${encodeURIComponent(texto)}`;
+            window.open(url, '_blank');
+        }
+    </script>
 </body>
 </html>
