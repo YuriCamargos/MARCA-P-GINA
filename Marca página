@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palavra da Natureza</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+    .bg-video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+    .container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 100%;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    #verse {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      white-space: pre-wrap;
+    }
+    #dataHora {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #eee;
+    }
+    #shareBtn {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop class="bg-video">
+    <source src="https://cdn.coverr.co/videos/coverr-a-river-in-the-woods-3954/1080p.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+  <div class="container">
+    <h1>✨ Versículo do Dia</h1>
+    <div id="verse"></div>
+    <button id="shareBtn">Compartilhar no WhatsApp</button>
+    <div id="dataHora"></div>
+  </div>
+
+  <script>
+    const versiculos = [
+      {
+        texto: "O Senhor é o meu pastor; nada me faltará. \nSalmo 23:1",
+        mensagem: "Deus cuida de você como um pastor cuida de suas ovelhas."
+      },
+      {
+        texto: "Tudo posso naquele que me fortalece. \nFilipenses 4:13",
+        mensagem: "Com Jesus ao seu lado, você pode enfrentar qualquer desafio."
+      },
+      {
+        texto: "Confia no Senhor de todo o teu coração. \nProvérbios 3:5",
+        mensagem: "Mesmo sem entender tudo, confiar em Deus é o melhor caminho."
+      }
+    ];
+
+    const sorteado = versiculos[Math.floor(Math.random() * versiculos.length)];
+    const textoFormatado = `<strong>${sorteado.texto}</strong><br><br><em>${sorteado.mensagem}</em>`;
+    document.getElementById("verse").innerHTML = textoFormatado;
+
+    document.getElementById("shareBtn").addEventListener("click", function() {
+      const textoWpp = `${sorteado.texto}\n\n${sorteado.mensagem}`;
+      const url = `https://wa.me/?text=${encodeURIComponent(textoWpp)}`;
+      window.open(url, '_blank');
+    });
+
+    function atualizarDataHora() {
+      const agora = new Date();
+      const opcoes = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+      const dataHora = agora.toLocaleDateString('pt-BR', opcoes);
+      document.getElementById("dataHora").textContent = dataHora;
+    }
+    atualizarDataHora();
+  </script>
+</body>
+</html>
