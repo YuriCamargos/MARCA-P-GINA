@@ -17,16 +17,8 @@
             align-items: center;
             position: relative;
             overflow: hidden;
-        }
-
-        video#bgVideo {
-            position: fixed;
-            top: 0;
-            left: 0;
-            min-width: 100%;
-            min-height: 100%;
-            object-fit: cover;
-            z-index: -1;
+            background-size: cover;
+            background-position: center;
         }
 
         .content {
@@ -64,11 +56,6 @@
     </style>
 </head>
 <body>
-    <video autoplay muted loop id="bgVideo">
-        <source src="https://storage.coverr.co/videos/coverr-nature-in-the-woods-7577/1080p.mp4" type="video/mp4">
-        Seu navegador não suporta vídeos em HTML5.
-    </video>
-
     <div class="content">
         <div class="versiculo" id="versiculo"></div>
         <div class="mensagem" id="mensagem"></div>
@@ -77,11 +64,27 @@
     </div>
 
     <script>
+        const imagensFundo = [
+            'https://source.unsplash.com/1600x900/?nature,water',
+            'https://source.unsplash.com/1600x900/?nature,forest',
+            'https://source.unsplash.com/1600x900/?nature,mountain',
+            'https://source.unsplash.com/1600x900/?nature,sunrise',
+            'https://source.unsplash.com/1600x900/?nature,river'
+        ];
+        document.body.style.backgroundImage = `url('${imagensFundo[Math.floor(Math.random() * imagensFundo.length)]}')`;
+
         const versiculos = [
             { texto: "Tudo posso naquele que me fortalece. (Filipenses 4:13)", mensagem: "Com Jesus ao seu lado, você pode enfrentar qualquer desafio." },
             { texto: "O Senhor é o meu pastor, nada me faltará. (Salmos 23:1)", mensagem: "Confie em Deus para cuidar de todas as suas necessidades." },
             { texto: "Entrega o teu caminho ao Senhor; confia nele, e o mais ele fará. (Salmos 37:5)", mensagem: "Coloque seus planos nas mãos de Deus e tenha fé." },
-            // Adicione mais versículos aqui até 50...
+            { texto: "Lâmpada para os meus pés é a tua palavra, e luz para o meu caminho. (Salmos 119:105)", mensagem: "A Palavra de Deus guia cada passo da nossa jornada." },
+            { texto: "Alegrai-vos na esperança, sede pacientes na tribulação, perseverai na oração. (Romanos 12:12)", mensagem: "Esperança e oração nos fortalecem em tempos difíceis." },
+            { texto: "Porque sou eu que conheço os planos que tenho para vocês, diz o Senhor. (Jeremias 29:11)", mensagem: "Deus tem um futuro de esperança preparado para você." },
+            { texto: "Não temas, porque eu sou contigo. (Isaías 41:10)", mensagem: "Deus está ao seu lado em todos os momentos." },
+            { texto: "Buscai primeiro o Reino de Deus. (Mateus 6:33)", mensagem: "Coloque Deus em primeiro lugar e o restante será acrescentado." },
+            { texto: "Sede fortes e corajosos. (Josué 1:9)", mensagem: "A coragem vem da confiança em Deus." },
+            { texto: "Bem-aventurados os que choram, porque serão consolados. (Mateus 5:4)", mensagem: "O consolo de Deus está sobre aqueles que sofrem." }
+            // Adicione mais versículos até completar 50...
         ];
 
         const hoje = new Date();
